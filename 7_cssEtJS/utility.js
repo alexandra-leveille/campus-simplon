@@ -26,9 +26,11 @@ selectAll = function selectAll(sCSS) {
 // handle -> callback function that handles the event
 parseObserveHandle = function parseObserveHandle(list, eventType, handler) {
     "use strict";
-    var i;
+    var i, found,
+    nodeListProto = ["[object NodeListPrototype]", "[object NodeList]"];
     try {
-        if (!list || Object.getPrototypeOf(list).toString() !== "[object NodeList]") {
+        found = nodeListProto.indexOf(Object.getPrototypeOf(list).toString());
+        if (!list || found === -1) {
             throw new Error("first argument must be a nodeList");
         }
         if (!eventType || typeof eventType !== "string") {
