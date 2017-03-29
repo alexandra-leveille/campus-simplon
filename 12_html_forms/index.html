@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaires -> PHP</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="../utility/utility.js"></script>
+    <script>
+        var forms = (function forms() {
+            "use strict";
+
+            window.onload = function start() {
+                roiDeLAuto();
+            };
+
+            function roiDeLAuto() {
+                var inputAutoPrice, maxPrice;
+
+                maxPrice = byId("my_max_price");
+                inputAutoPrice = byId("price_range");
+                inputAutoPrice.oninput = function afficher() {
+                    maxPrice.textContent = inputAutoPrice.value;
+                };
+            }
+            // ecouter les changements sur l'input
+            // mettre à jour le prix max (span)
+        }());
+    </script>
+</head>
+<body>
+    <h1 class="title">Roi de l'auto</h1>
+    <form method="post" action="traitement.php">
+
+        <label class="title" for="select_brand">Marque</label>
+        <select id="select_brand" name="brand">
+            <option value="bentley">Bentley</option>
+            <option value="lotus">Lotus</option>
+            <option value="koenig">Koenigg</option>
+            <option value="ferrari">Ferrari</option>
+            <option value="bugatti">Bugatti</option>
+            <option value="rolls-royce">Rolls Royce</option>
+            <option value="porsche">Porsche</option>
+            <option value="mercedes">Mercedes</option>
+        </select>
+
+        <label class="title" for="select_type">Gamme</label>
+        <select id="select_type" name="type">
+            <option value="berline">Berline</option>
+            <option value="coupe">Coupé</option>
+            <option value="sportive">Sportive</option>
+            <option value="super-sportive">Super Sportive</option>
+            <option value="suv">SUV</option>
+            <option value="compacte">Compacte</option>
+            <option value="limousine">Limousine</option>
+        </select>
+
+        <label class="title">Etat</label>
+        <label class="hover" for="state_new_old">Neuf &amp; occasion</label>
+        <input id="state_new_old" type="radio" name="state" value="new_old">
+        <label class="hover" for="state_new">Neuf</label>
+        <input id="state_new" type="radio" name="state" value="new">
+        <label class="hover" for="state_old">Occasion</label>
+        <input id="state_old" type="radio" name="state" value="old">
+
+        <label class="title">
+            <span>Prix max:</span>
+            <span id="my_max_price">1000</span>
+            <span>&nbsp;€</span>
+        </label>
+        <input value="5000" min="5000" max="1000000" type="range" id="price_range" name="price_range">
+
+        <button class="submit" name="submit">OK !</button>
+    </form>
+</body>
+</html>
