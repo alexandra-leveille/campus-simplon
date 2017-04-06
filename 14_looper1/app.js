@@ -83,11 +83,12 @@ var app = (function app() {
 
         trouverLaDestination = function trouverLaDestination() {
             destination = this.parentElement;
-
+            log("on remonte l'arbre HTML jusqu'a la cible ... ");
             while (destination.id !== "bonus") {
                 destination = destination.parentElement;
+                log(destination);
             }
-            log(destination);
+            log("fin de boucle !");
         };
 
         cible.onclick = trouverLaDestination;
