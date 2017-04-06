@@ -27,6 +27,21 @@ label.hover:hover {
     margin: 20px 0;
     display: block;
 }
+.upload {
+    cursor: pointer;
+    display: block !important;
+}
+.input {
+    height: 32px;
+    padding: 0 20px;
+    min-width: 220px;
+    border-radius: .3rem;
+    border: 1px solid silver;
+}
+.is-hidden {
+    display: none;
+}
+
 input[type=text], input[type=range] {
     display: block;
 }
@@ -43,4 +58,16 @@ input[type=text], input[type=range] {
 .submit:hover {
     background: firebrick;
     color: white;
+}
+.circle {
+    height: 125px;
+    width: 125px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid chartreuse;
+    background: cadetblue;
+    color: chartreuse;
+    border-radius: 50%;
+    margin-top: 20px;
 }
