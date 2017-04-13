@@ -1,27 +1,46 @@
 var app = (function app() {
-  "use strict";
-  var doWhile;
+    "use strict";
+    var dom, doWhile, parcourirDataset, observer;
 
-  window.onload = function start() {
-      log("ready to rock");
+    window.onload = function start() {
+        log("ready to rock");
+        dom = {};
+        dom.exo1 = byId("do_while");
+        dom.exo2_3 = byId("get_data");
+    };
 
-      doWhile();
+    doWhile = function doWhile() {
+        var quest, res, resUser;
 
-  };
+        quest = "JS ça roxxx ?";
+        res = "oui";
 
-  doWhile = function doWhile() {
-    var quest, res, resUser;
+        do {
+            resUser = window.prompt(quest);
 
-    quest = "JS ça roxxx ?";
-    res = "oui";
+        } while (resUser !== res);
 
-    // do {
-      resUser = window.prompt(quest);
-      log(typeof resUser)
-    // } while (resUser !== res);
+        window.alert("oookay c'est bon voilà ton dessert !!!");
 
-    window.alert("oookay c'est bon voilà ton dessert !!!");
+    };
 
-  };
+
+    parcourirDataset = function parcourirDataset() {
+
+      dataset1.forEach(function parse(perso) {
+        creerCarte(perso);
+      });
+    };
+
+    creerCarte = function creerCarte(info) {
+      log(info);
+    };
+
+
+
+    observer = function observer() {
+      dom.exo1.onclick = doWhile;
+      dom.exo2_3.onclick = parcourirDataset;
+    };
 
 }());
