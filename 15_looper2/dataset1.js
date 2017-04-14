@@ -4,7 +4,7 @@ var dataset1 = [
     nom:'Napier',
     genre:'personnage',
     age:null,
-    icon:null,
+    icon: "img/joker.jpg",
     hobbies:['être l\'ennemi de batman', 'farces et attrapes', 'humour noir']
   },
   {
@@ -12,7 +12,7 @@ var dataset1 = [
     nom:'Reed',
     genre:'humain',
     age:71,
-    icon:null,
+    icon: "img/lou.jpg",
     hobbies:['musique', 'be a rockstar', 'groupies']
   },
   {
@@ -20,7 +20,7 @@ var dataset1 = [
     nom:'Lovelace',
     genre:'humain',
     age:37,
-    icon:null,
+    icon: "img/ada.png",
     hobbies:['inventer l\'algorithme', 'mathématiques', 'donner son nom à un langage de programmation']
   },
   {
@@ -28,7 +28,7 @@ var dataset1 = [
     nom:'Dog',
     genre:'humain',
     age:44,
-    icon:null,
+    icon: "img/snoop.jpg",
     hobbies:['rapping', 'rolling', 'stoning']
   },
   {
@@ -36,7 +36,7 @@ var dataset1 = [
     nom:'Thomas',
     genre:'humain',
     age:60,
-    icon:null,
+    icon: "img/evelyne.jpg",
     hobbies:['c\'est', 'ton', 'choix']
   },
   {
@@ -44,7 +44,7 @@ var dataset1 = [
     genre:'animal',
     espece:'chat',
     age:5,
-    icon:null,
+    icon: "img/kitty.jpg",
     hobbies:['lait', 'souris', 'ronron', 'sieste']
   },
   {
@@ -52,15 +52,15 @@ var dataset1 = [
     genre:'animal',
     espece:'chien',
     age:8,
-    icon:null,
+    icon: "img/wako.jpg",
     hobbies:['os', 'bâton', 'aboyer', 'sieste']
   },
   {
     nom:'Bulle',
-    genre:'animal',
+    genre:'personnage',
     espece:'poisson rouge',
     age:13,
-    icon:null,
+    icon: "img/bulle.jpg",
     hobbies:['tourner en rond', 'oublier', 'buller']
   }
 ];
