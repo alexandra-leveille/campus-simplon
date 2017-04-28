@@ -6,7 +6,7 @@ ini_set('display_startup_errors',1);
 
 function connectDatabase() {
   try {
-      $db = new PDO('mysql:host=localhost;dbname=le_fr_pour_tous', "root", "scream");
+      $db = new PDO('mysql:host=localhost;dbname=le_fr_pour_tous', "root", "@mysql");
       return $db;
   } catch (PDOException $e) {
       print "Erreur !: " . $e->getMessage() . "<br/>";

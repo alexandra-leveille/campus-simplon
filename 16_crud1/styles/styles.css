@@ -40,3 +40,23 @@ a {
   border-radius: .3rem;
   border: 1px solid silver;
 }
+
+.list.lieux {
+    padding: 5px 20px 20px;
+    border: 1px solid silver;
+    margin-bottom: 100px;
+}
+
+.list.lieux .item {
+    list-style: none;
+    border-bottom: 1px solid silver;
+    padding: 5px 0;
+}
+
+.list.lieux span, .list.lieux a {
+    margin-right: 10px;
+}
+
+.list.lieux a:hover {
+    color: orange;
+}

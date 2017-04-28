@@ -2,15 +2,11 @@
 // app est une IIFE : Immediatly Invoqued Function Expression
 var app = (function app() {
     "use strict";
-    var creerBlocks, dom, observer, gererSelectionBlock, mettreBlocksActifsAjour;
+    var creerBlocks, dom = {}, observer, gererSelectionBlock, mettreBlocksActifsAjour;
 
-    dom = {};
-
-    // étape 2 => créer un sous-programme permettant
-    // la sélection/désélection au clicks des blocks :
-    // la bordure du block change de couleur (actif/inactif)
-    // au changement de l'input de couleur, les blocks selectionnés sont affectés
-
+    // écouter les clicks sur le bouton submit (dom.btn)
+    // afficher un message de confirmation log() dans creerBlocks
+    // récupérer la valeur de dom.count
     window.onload = function start() {
         dom.btn = byId("create_blocks");
         dom.color = byId("color_blocks");
@@ -26,15 +22,14 @@ var app = (function app() {
         }
     };
 
-
     gererSelectionBlock = function gererSelectionBlock() {
         this.classList.toggle("is-active");
     };
 
     creerBlocks = function creerBlocks() {
-        var i, limit, block;
-        limit = Number(dom.count.value);
-        for (i = 0; limit >= 1 && i < limit; i += 1) {
+        var i, count, block;
+        count = Number(dom.count.value);
+        for (i = 0; count >= 1 && i < count; i += 1) {
             // on créé une div
             block = document.createElement("div");
             // on lui applique la class block pour la lier au CSS
@@ -49,7 +44,6 @@ var app = (function app() {
     };
 
     observer = function observer() {
-
         dom.btn.onclick = function choisir() {
             // les blocks cliqués ont la classe active...
             var actives = dom.blocks.querySelectorAll(".block.is-active");

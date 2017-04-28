@@ -1,28 +1,31 @@
 <?php include_once("utility.php");
 
 
-echo "hello world !!!";
-exit();
-
-
 $db = connectDatabase();
 
-if (isset($_POST["create_data"])) {
+if (isset($_POST["create_lieux"])) {
   // echo "data posted: creation";
   // debug($_POST);
   createData();
 }
 
-if (isset($_GET["action"]) && $_GET["action"] === "read_data") {
-  // echo "data posted: creation";
-  // debug($_POST);
-  readData();
+if (isset($_GET["action"]) && $_GET["action"] === "read_lieux") {
+  // echo "data posted: read";
+  // debug($_GET);
+  readAllLieux();
+  header("Location: index.php");
+}
+
+if (isset($_GET["action"]) && $_GET["action"] === "delete_lieu") {
+  deleteData();
 }
 
 
 function createData() {
   global $db;
 
+  debug($_POST);
+  exit;
   $req = $db->prepare("INSERT INTO lieux (adresse, cp, lati, longi) VALUES (:adresse, :cp, :lati, :longi)");
 
   $req->bindParam(':adresse', $_POST["adresse"]);
@@ -31,17 +34,26 @@ function createData() {
   $req->bindParam(':longi', $_POST["longi"]);
 
   $res = $req->execute();
-
+  header("Location: index.php");
   // debugX($res);
 }
 
-function readData() {
+
+function readLieu($id) {
+  global $db;
+  $req = $db->prepare("SELECT * FROM lieux WHERE id = :id");
+  $req->bindParam(':id', $id);
+  $req->execute();
+  $res = $req->fetch(PDO::FETCH_OBJ);
+  return $res;
+}
+
+function readAllLieux() {
   global $db;
   $req = $db->prepare("SELECT * FROM lieux");
   $req->execute();
   $res = $req->fetchAll(PDO::FETCH_OBJ);
-  $_SESSION["lieux"] = $res;
-  header("Location: index.php");
+  return $res;
 }
 
 
@@ -51,5 +63,11 @@ function updateData() {
 
 
 function deleteData() {
-  $sql = "DELETE FROM maBase";
+    global $db;
+    // exit;
+    $req = $db->prepare("DELETE FROM lieux WHERE id = :id");
+    $req->bindParam(':id', $_GET["id"]);
+    $req->execute();
+    header("Location: index.php");
+  // echo $sql;
 }
