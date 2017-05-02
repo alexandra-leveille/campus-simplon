@@ -35,7 +35,7 @@ mapsWidget = function mapsWidget() {
                     // log(formInfos);
                     dom.adress.value = formInfos[0].short_name + " " + formInfos[1].long_name;
                     dom.cp.value = (formInfos[6]) ? formInfos[6].short_name : '';
-                    dom.ville.value = formInfos[3].long_name;
+                    dom.ville.value = formInfos[2].long_name;
                     dom.lati.value = pos.lat();
                     dom.long.value = pos.lng();
 
@@ -55,6 +55,7 @@ mapsWidget = function mapsWidget() {
     dom.ville = byId("ville");
     dom.lati = byId("lati");
     dom.long = byId("long");
+
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         mapTypeId: 'roadmap',
@@ -65,6 +66,7 @@ mapsWidget = function mapsWidget() {
             lng: dom.long.value ? Number(dom.long.value) : 2.347555
         }
     });
+
     input = document.getElementById('search_map');
     searchBox = new google.maps.places.SearchBox(input);
     markers = [];

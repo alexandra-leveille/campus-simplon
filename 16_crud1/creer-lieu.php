@@ -1,6 +1,4 @@
-<?php
-include("inc/header.php");
-?>
+<?php include("inc/header.php");?>
 <body class="page-create">
     <a href="index.php" title="Retour à l'accueil" class="fa fa-home"></a>
     <h1 class="title">Ajouter lieux</h1>

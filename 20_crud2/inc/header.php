@@ -9,7 +9,17 @@
   <title>CRUD 1</title>
   <link rel="stylesheet" href="styles/styles.css">
   <script src="../utility/utility.js"></script>
-  <script src="js/maps-widget.js"></script>
   <script src="js/app.js"></script>
   <script src="https://use.fontawesome.com/2d672d9c4e.js"></script>
 </head>
+<body>
+    <nav class="nav-main">
+        <ul class="row">
+            <li>
+              <a href="index.php">lister user</a>
+            </li>
+            <li>
+              <a href="create-user.php">créer utilisateur</a>
+            </li>
+        </ul>
+    </nav>

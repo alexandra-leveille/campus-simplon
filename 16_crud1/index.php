@@ -1,6 +1,4 @@
-<?php
-  include("inc/header.php");
-?>
+<?php include("inc/header.php");?>
 <body>
   <h1 class="title">CRUD 1</h1>
   <p class="text">
@@ -11,18 +9,15 @@
     Première étape : créer une petite base de données, puis...<br>
     Insérer, lire, mettre à jour, supprimer des données !<br>
     Commençons par la méthode "classique" synchrone.<br>
-    Puis en asynchrone avec le serveur:=
+    Puis en asynchrone avec le serveur.
   </p>
-
   <h2 class="title">Ajouter un lieu (create)
       <a href="creer-lieu.php" class="icon">
           <i class="icon fa fa-plus" aria-hidden="true"></i>
       </a>
   </h2>
 
-  <h2 class="title">Afficher les lieux (read)
-      <a href="api.php?action=read_lieux" class="icon fa fa-list" aria-hidden="true"></a>
-  </h2>
+  <h2 class="title">Afficher les lieux (read)</h2>
   <?php
     $all_lieux = readAllLieux();
 
@@ -53,10 +48,13 @@
             echo '<td class="ville">'. $lieu->ville .'</td>';
 
             echo '<td class="geoloc" title="latitude:'. $lieu->lati . '&#10;longitude: ' .  $lieu->longi .'"><i class="fa fa-map-marker" aria-hidden="true"></i></td>';
+
             echo '<td><a title="editer" href="editer-lieu.php?id=' .
             $lieu->id . '" class="fa fa-pencil" aria-hidden="true"></a></td>';
+
             echo '<td><a title="supprimer" href="api.php?action=delete_lieu&id=' .
             $lieu->id . '" class="fa fa-times" aria-hidden="true"></a></td>';
+
         echo "</tr>";
       }
 

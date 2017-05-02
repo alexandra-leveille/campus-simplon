@@ -23,9 +23,6 @@ if (isset($_POST["create_lieux"])) {
 
 function createLieu() {
   global $db;
-
-  // debug($_POST);
-  // exit;
   $req = $db->prepare("INSERT INTO lieux (adresse, cp, ville, lati, longi) VALUES (:adresse, :cp, :ville, :lati, :long)");
 
   $req->bindParam(':adresse', $_POST["adresse"]);
@@ -61,7 +58,7 @@ function readAllLieux() {
 
 function updateLieu() {
   global $db;
-  $req =  $db->prepare("UPDATE `lieux` SET `adresse` = :adresse, `cp` = :cp, `ville` = :ville, `lati` = :lati, `longi` = :long WHERE id = :id");
+  $req = $db->prepare("UPDATE `lieux` SET `adresse` = :adresse, `cp` = :cp, `ville` = :ville, `lati` = :lati, `longi` = :long WHERE id = :id");
   $req->bindParam(':id', $_SESSION["current_id_lieu"]);
   $req->bindParam(':adresse', $_POST["adresse"]);
   $req->bindParam(':cp', $_POST["cp"]);
