@@ -8,13 +8,13 @@ var app = (function app() {
 
     observer = function observer() {
         byId("create_car").onclick = function action1() {
-            // log(this);// ici this représente la source de l'évent (le bouton)
+            // log(this);// ici this représente la source de l'event (le bouton)
             cars.push(new Car());
             log(cars);
         };
 
         byId("create_animal").onclick = function action2() {
-            // log(this);// ici this représente la source de l'évent (le bouton)
+            // log(this);// ici this représente la source de l'event (le bouton)
             animals.push(new Animal());
             log(animals);
         };
