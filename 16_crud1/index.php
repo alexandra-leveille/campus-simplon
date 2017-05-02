@@ -1,63 +1,67 @@
 <?php
-  include_once("utility.php");
-  include_once("api.php");
-  $all_lieux = readAllLieux();
+  include("inc/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD 1</title>
-  <link rel="stylesheet" href="styles/styles.css">
-  <script src="../utility/utility.js"></script>
-  <script src="js/app.js"></script>
-</head>
 <body>
   <h1 class="title">CRUD 1</h1>
   <p class="text">
-    l'acronyme CRUD représente les opération élémentaires en programmation<br>
+    L'acronyme <a class="link" href="https://fr.wikipedia.org/wiki/CRUD">CRUD</a><br>représente les opération élémentaires en programmation<br>
     CREATE / READ / UPDATE / DELETE
   </p>
   <p class="text">
-    première étape : créer une petite base de données<br>
-    comprendre les principes de base<br>
-    insérer, lire, mettre à jour, supprimer des données...<br>
-    nous commençons par la méthode synchrone<br>
-    puis utiliseront la technologie AJAX pour communiquer de façon asynchrone avec le serveur PHP
+    Première étape : créer une petite base de données, puis...<br>
+    Insérer, lire, mettre à jour, supprimer des données !<br>
+    Commençons par la méthode "classique" synchrone.<br>
+    Puis en asynchrone avec le serveur:=
   </p>
 
-  <h2 class="title">Ajouter lieux (Create)</h2>
+  <h2 class="title">Ajouter un lieu (create)
+      <a href="creer-lieu.php" class="icon">
+          <i class="icon fa fa-plus" aria-hidden="true"></i>
+      </a>
+  </h2>
 
-  <form action="api.php" method="post">
-    <input class="input" type="text" name="adresse" placeholder="adresse" value="test">
-    <input class="input" type="number" name="cp" placeholder="code postal" value="75018">
-    <input class="input" type="number" name="lati" step="any" value="111.3333">
-    <input class="input" type="number" name="longi" step="any" value="611.3333">
-    <input id="submit_create" type="submit" name="create_lieux">
-  </form>
-
-  <h2 class="title">Afficher les lieux (READ)
-      <a href="api.php?action=read_lieux">OK</a>
+  <h2 class="title">Afficher les lieux (read)
+      <a href="api.php?action=read_lieux" class="icon fa fa-list" aria-hidden="true"></a>
   </h2>
   <?php
+    $all_lieux = readAllLieux();
+
     if (sizeof($all_lieux) === 0) {
         echo '<div class="no-result">Pas de lieux pour le moment</div>';
+
     } else {
-      echo '<ul class="list lieux">';
+
+      echo '<table class="tabler lieux">';
+      echo '<thead class="header">';
+        echo '<tr>';
+          echo '<td class="id-row">ID</td>';
+          echo '<td class="adresse">Adresse</td>';
+          echo '<td class="cp">CP</td>';
+          echo '<td class="cp">Ville</td>';
+          echo "<td>Géoloc</td>";
+          echo '<td>Editer</td>';
+          echo '<td>Supprimer</td>';
+        echo '</tr>';
+      echo '</thead>';
+      echo '<tbody class="body">';
+
       foreach ($all_lieux as $lieu) {
-        echo '<li class="item">';
-            echo "<span>$lieu->cp</span>";
-            echo "<span>$lieu->adresse</span>";
-            echo "<span>$lieu->lati</span>";
-            echo "<span>$lieu->longi</span>";
-            echo '<a href="editer-lieux.php?id=' .
-            $lieu->id . '">editer</a>';
-            echo '<a href="api.php?action=delete_lieu&id=' .
-            $lieu->id . '">supprimer</a>';
-        echo "</li>";
+        echo '<tr class="item">';
+            echo '<td class="id-row">'. $lieu->id .'</td>';
+            echo '<td class="adresse">'. $lieu->adresse .'</td>';
+            echo '<td class="cp">'. $lieu->cp .'</td>';
+            echo '<td class="ville">'. $lieu->ville .'</td>';
+
+            echo '<td class="geoloc" title="latitude:'. $lieu->lati . '&#10;longitude: ' .  $lieu->longi .'"><i class="fa fa-map-marker" aria-hidden="true"></i></td>';
+            echo '<td><a title="editer" href="editer-lieu.php?id=' .
+            $lieu->id . '" class="fa fa-pencil" aria-hidden="true"></a></td>';
+            echo '<td><a title="supprimer" href="api.php?action=delete_lieu&id=' .
+            $lieu->id . '" class="fa fa-times" aria-hidden="true"></a></td>';
+        echo "</tr>";
       }
-      echo "</ul>";
+
+      echo '</tbody>';
+      echo "</table>";
     }
   ?>
 </body>

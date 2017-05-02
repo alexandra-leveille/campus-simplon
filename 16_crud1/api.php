@@ -4,34 +4,35 @@
 $db = connectDatabase();
 
 if (isset($_POST["create_lieux"])) {
-  // echo "data posted: creation";
-  // debug($_POST);
-  createData();
-}
+  createLieu();
+  header("Location: index.php");
 
-if (isset($_GET["action"]) && $_GET["action"] === "read_lieux") {
-  // echo "data posted: read";
-  // debug($_GET);
+} elseif (isset($_GET["action"]) && $_GET["action"] === "read_lieux") {
   readAllLieux();
   header("Location: index.php");
+
+} elseif (isset($_GET["action"]) && $_GET["action"] === "delete_lieu") {
+    deleteLieu();
+    header("Location: index.php");
+
+} elseif (isset($_POST["update_lieu"])) {
+    updateLieu();
+    header("Location: index.php");
 }
 
-if (isset($_GET["action"]) && $_GET["action"] === "delete_lieu") {
-  deleteData();
-}
 
-
-function createData() {
+function createLieu() {
   global $db;
 
-  debug($_POST);
-  exit;
-  $req = $db->prepare("INSERT INTO lieux (adresse, cp, lati, longi) VALUES (:adresse, :cp, :lati, :longi)");
+  // debug($_POST);
+  // exit;
+  $req = $db->prepare("INSERT INTO lieux (adresse, cp, ville, lati, longi) VALUES (:adresse, :cp, :ville, :lati, :long)");
 
   $req->bindParam(':adresse', $_POST["adresse"]);
   $req->bindParam(':cp', $_POST["cp"]);
+  $req->bindParam(':ville', $_POST["ville"]);
   $req->bindParam(':lati', $_POST["lati"]);
-  $req->bindParam(':longi', $_POST["longi"]);
+  $req->bindParam(':long', $_POST["long"]);
 
   $res = $req->execute();
   header("Location: index.php");
@@ -48,6 +49,7 @@ function readLieu($id) {
   return $res;
 }
 
+
 function readAllLieux() {
   global $db;
   $req = $db->prepare("SELECT * FROM lieux");
@@ -57,17 +59,25 @@ function readAllLieux() {
 }
 
 
-function updateData() {
-  $sql = "UPDATE INTO maBase";
+function updateLieu() {
+  global $db;
+  $req =  $db->prepare("UPDATE `lieux` SET `adresse` = :adresse, `cp` = :cp, `ville` = :ville, `lati` = :lati, `longi` = :long WHERE id = :id");
+  $req->bindParam(':id', $_SESSION["current_id_lieu"]);
+  $req->bindParam(':adresse', $_POST["adresse"]);
+  $req->bindParam(':cp', $_POST["cp"]);
+  $req->bindParam(':ville', $_POST["ville"]);
+  $req->bindParam(':lati', $_POST["lati"]);
+  $req->bindParam(':long', $_POST["long"]);
+  $res = $req->execute();
+  unset($_SESSION["current_id_lieu"]);
+  return $res;
 }
 
 
-function deleteData() {
+function deleteLieu() {
     global $db;
-    // exit;
     $req = $db->prepare("DELETE FROM lieux WHERE id = :id");
     $req->bindParam(':id', $_GET["id"]);
     $req->execute();
-    header("Location: index.php");
   // echo $sql;
 }
