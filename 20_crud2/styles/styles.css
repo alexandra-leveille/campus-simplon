@@ -20,6 +20,18 @@ a {
     text-decoration: none;
 }
 
+.grid-header,
+.grid-footer {
+    background: #393939;
+    padding: 10px 20px;
+    color: white;
+}
+
+.grid-footer {
+    margin-top: 20px;
+    text-align: right;
+}
+
 .row, .col {
     display: flex;
 }
@@ -48,10 +60,6 @@ a {
     margin: 20px 0;
 }
 
-.title:first-of-type {
-    margin-top: 0;
-}
-
 .input {
     display: block;
     margin-bottom: 10px;
@@ -60,10 +68,6 @@ a {
     padding: 3px 0 3px 20px;
     border-radius: .3rem;
     border: 1px solid silver;
-}
-
-.nav-main {
-    margin-bottom: 20px;
 }
 
 .nav-main ul {
@@ -75,5 +79,39 @@ a {
 }
 
 .nav-main li a:hover {
-    color: firebrick;
+    color: lime;
+}
+
+.tabler, .tabler td, .tabler th {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+.tabler td, .tabler th {
+    text-align: center;
+    padding: 15px;
+}
+
+.tabler td.delete {
+    cursor: pointer;
+}
+
+.tabler td.delete > input {
+    pointer-events: none;
+}
+
+.tabler tbody tr:hover {
+    background: silver;
+    color: white;
+}
+
+.tabler tr:hover .link {
+    cursor: pointer;
+    color: cadetblue;
+}
+
+.tabler  button.link {
+    border: none;
+    background: none;
+    font-size: 1.2rem;
 }

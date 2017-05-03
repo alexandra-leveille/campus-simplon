@@ -3,11 +3,16 @@ include_once("utility.php");
 
 $db = connectDatabase();
 
-// si POST contient create_user
-// si oui => exécuter une fonction pour insérer le nouvel user
-
 if (isset($_POST["create_user"])) {
     createUser();
+    header("Location: index.php");
+
+} elseif (isset($_POST["update_user"])) {
+    updateUser();
+    header("Location: index.php");
+
+} elseif (isset($_POST["delete_users"])) {
+    deleteUsers();
     header("Location: index.php");
 }
 
@@ -24,6 +29,12 @@ function createUser() {
 }
 
 function readUser($id) {
+    global $db;
+    $req = $db->prepare("SELECT * FROM utilisateurs WHERE id = :id");
+    $req->bindParam(":id", $id);
+    $req->execute();
+    $res = $req->fetch(PDO::FETCH_OBJ);
+    return $res;
 }
 
 function readUsers() {
@@ -34,9 +45,27 @@ function readUsers() {
     return $res;
 }
 
-
 function updateUser() {
+    global $db;
+    $req = $db->prepare("UPDATE `utilisateurs` SET `nom` = :nom, `prenom` = :prenom, `email` = :email WHERE id = :id");
+    $req->bindParam(":id", $_SESSION["current_user_id"]);
+    $req->bindParam(":nom", $_POST["nom"]);
+    $req->bindParam(":prenom", $_POST["prenom"]);
+    $req->bindParam(":email", $_POST["email"]);
+
+    $res = $req->execute();
+    // debugX($res);
+    unset($_SESSION["current_user_id"]);
+    return $res;
 }
 
-function deleteUser() {
+function deleteUsers() {
+    global $db;
+    if (isset($_POST["users_id"])) {
+        foreach ($_POST["users_id"] as $key => $id) {
+            $req = $db->prepare("DELETE FROM `utilisateurs` WHERE id = :id");
+            $req->bindParam(":id", $id);
+            $req->execute();
+        }
+    }
 }
