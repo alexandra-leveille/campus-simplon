@@ -61,6 +61,7 @@ function updateUser() {
 
 function deleteUsers() {
     global $db;
+    // debugX($_POST);
     if (isset($_POST["users_id"])) {
         foreach ($_POST["users_id"] as $key => $id) {
             $req = $db->prepare("DELETE FROM `utilisateurs` WHERE id = :id");
