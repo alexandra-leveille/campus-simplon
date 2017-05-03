@@ -24,7 +24,7 @@ mapsWidget = function mapsWidget() {
     };
 
     updateForm = function updateForm(pos) {
-        log(pos);
+        // log(pos);
         geocoder.geocode({
             'latLng': pos
         }, function(results, status) {
