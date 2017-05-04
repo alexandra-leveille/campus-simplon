@@ -1,18 +1,20 @@
 /*global byId, select, selectAll, log*/
-var TabsWidget = (function initTabsWidget() {
+var TabsWidget = (function TabsWidget() {
     "use strict";
-
+    
     var dom = {},
-        gereClicks,
+        gererClicks,
         observer;
 
     window.onload = function start() {
+        // on transforme la nodeList retournée par querySelectorAll
+        // en tableau (utilisé dans gererClicks avec indexof)
         dom.tabs = Array.prototype.slice.call(selectAll(".tab"));
         dom.contents = selectAll(".content");
         observer();
     };
 
-    gereClicks = function gereClicks(evt) {
+    gererClicks = function gererClicks(evt) {
         // log(evt);
         var indexCible,
             previousTab,
@@ -21,9 +23,9 @@ var TabsWidget = (function initTabsWidget() {
         indexCible = dom.tabs.indexOf(this);
         // on selectionne la tab ET le content déjà actifs
         previousTab = select(".tab.is-active");
-
+        // si on click sur une tab déjà sélectionnée
         if (previousTab === this) {
-            return;
+            return;// pas besoin d'aller plus loin...
 
         } else {
             previousContent = select(".content.is-active");
@@ -39,12 +41,10 @@ var TabsWidget = (function initTabsWidget() {
 
     observer = function observer() {
         // on parcourt toutes les tabs du widget
-        // le second param (this) définit la valeur de this dans le forEach
         dom.tabs.forEach(function parse(tab) {
             // on écoute les clicks sur chaque tab
-            tab.onclick = gereClicks;
-
-        }, this);
+            tab.onclick = gererClicks;
+        });
     };
 
 }());
