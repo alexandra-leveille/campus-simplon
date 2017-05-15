@@ -1,28 +1,20 @@
 var Cake = function Cake(conf) {
+    this.price = conf.price || null;
+    this.flavor = conf.flavor;
+    this.fullName = "un cake aromatisé " + conf.flavor;
+};
 
-    var that, CakeFactory = function CakeFactory(conf) {
-        that = this;
-        this.icon = conf.icon || null;
-        this.price = conf.price || null;
-        this.flavor = conf.flavor;
-        this.fullName = "un cake aromatisé " + conf.flavor;
+CakeFactory.prototype.miam = function miam() {
+    return "Huumm ça sent bon un cake au " + this.flavor;
+};
 
-        if (this.icon) {
-            this.observer();
-        }
-    };
+var CakeIcon = function CakeIcon() {
+    this.element = document.createElement("i");
+    this.element.className = "fa fa-birthday-cake";
 
-    CakeFactory.prototype.miam = function miam() {
-        return "Huumm ça sent bon un cake au " + this.flavor;
-    };
+    this.element.onclick = this.handleClick;
+};
 
-    CakeFactory.prototype.action = function action() {
-        log(this); // que vaut this ici ?
-    };
+CakeIcon.prototype.handleClick = function handleClick(e) {
 
-    CakeFactory.prototype.observer = function observer() {
-        this.icon.onclick = this.action.bind(this);
-    };
-
-    return new CakeFactory(conf);
 };
