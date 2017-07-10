@@ -48,6 +48,21 @@ function postViaAjax3() {
 }
 
 
+function getViaAjaxVanilla() {
+    var xhr;
+    xhr = new XMLHttpRequest();
+
+    xhr.open("get", url);
+
+    xhr.onload = function getResponse(res) {
+        log(res);
+    };
+
+    xhr.send(null);
+
+}
+
+
 function getViaAjaxJQ() {
     // récupérer le contenu d'un fichier HTML
     $.get("test.html", function parse(html) {
@@ -55,7 +70,6 @@ function getViaAjaxJQ() {
         byId("cible_content_ajax").innerHTML = html;
     });
 }
-
 
 function getFromWebAPIViaAjaxJQ() {
     var url = "https://opendata.paris.fr/api/records/1.0/search/?dataset=resultats_electoraux&rows=1000&facet=libelle_du_scrutin&facet=date_du_scrutin_jj_mm_ssaa&facet=numero_d_arrondissement_01_a_20&facet=numero_de_bureau_de_vote_000_a_999&facet=nom_du_candidat_ou_liste";
