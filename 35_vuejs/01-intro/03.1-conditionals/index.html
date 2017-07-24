@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 3.1 - Conditionals</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <style>
+        .range p {
+            transition: color 5s linear;
+        }
+        .above {
+            color: firebrick;
+        }
+        .below {
+            color: darkblue;
+        }
+    </style>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#app",
+                data: {
+                    count: 0,
+                    show: true
+                },
+                methods: {
+
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <div id="app" class="app">
+        <h1 class="title">Conditionals</h1>
+        <!-- la directive v-if ajoute ou supprime un element du DOM en fonction d'une valeur booléene -->
+        <div>
+            <p v-if="show">You can see me <span>!!!</span></p>
+            <p v-else>Can you see me ???</p>
+            <button @click="show = !show">switch</button>
+        </div>
+        <!--  la directive v-show est fondée sur la même logique mais l'élément n'est pas détaché du DOM. Il est caché via CSS -->
+        <h2 v-show="show">VueJs === easy creativity</h2>
+        <div class="range">
+            <p>{{ count }} ...</p>
+            <p class="below" v-if="count < 0">is below zero</p>
+            <p class="above" v-else-if="count > 0">is above zero</p>
+            <p v-else>equals zero</p>
+
+            <input type="range" v-model="count"
+            min="-50" max="50" step="10">
+            <!-- l'élément template n'est pas render par le navigateur
+            il permet de grouper des éléments à afficher sous condition  -->
+            <template v-if="count > 20">
+                <p>@template : wow that's a big number !</p>
+            </template>
+        </div>
+
+    </div>
+</body>
+
+</html>

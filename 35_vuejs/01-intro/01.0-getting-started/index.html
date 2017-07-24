@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 1.0</title>
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#app",
+                data: {
+                    finishedLink: "<a class=\"link\" href=\"https://google.com\">google it !</a>",
+                    devtoolsLink: "<a class=\"link\" href=\"https://github.com/vuejs/vue-devtools\">Vue devtools !</a>",
+                    title: "MyApp Title",
+                    text: "Vue is a javascript framework for building spa, components, web apps and hybrid apps.",
+                    link: "http://ow-lab.com",
+                    imgs: [],
+                    count: 0
+                },
+                methods: {
+                    onTextChange: function(e) {
+                        this.text = e.target.value;
+                    },
+                    onTitleChangePrevent: function(e) {
+                        this.title = e.target.value;
+                    },
+                    increment: function(){
+                        this.count += 1;
+                    },
+                    sayHello: function(e) {
+                        return "hello world !";
+                    },
+                    sayTitleViaThis: function() {
+                        return this.title;
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- the v-once directive will assure a vue prop will not be modified -->
+        <h1 v-once>{{ title }}</h1>
+        <button @click="increment">click me</button>
+        {{count}}
+        <p>
+            <!-- problem: string interpolation will not work in attribute
+            soluce: v-bind is a directive for interpreting vue prop
+            inside attribute.  -->
+            <a v-bind:href="link" target="_blank">go owls</a>
+            <!-- by default, vue js will escape this as strin
+            as a protection against xss attacks -->
+
+        </p>
+        <p style="color: firebrick"> {{ finishedLink }} </p>
+        </p>
+        <p v-html="finishedLink"></p>
+        <p v-html="devtoolsLink"></p>
+        <hr>
+        <p>
+            {{ text }}
+        </p>
+        <hr>
+        <input type="text" v-on:input="onTextChange" placeholder="change the text prop">
+        <input type="text" v-on:input="onTitleChangePrevent" placeholder="page top title remains">
+        <hr>
+        <p>{{ sayHello() }}</p>
+        <p>{{ sayTitleViaThis() }}</p>
+    </div>
+</body>
+
+</html>

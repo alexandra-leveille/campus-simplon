@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 5.2 - Instance Lifecycle</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <style>
+
+    </style>
+    <script>
+        window.onload = function start() {
+
+            var app1 = new Vue({
+                el: "#app1",
+                data: {
+                    title: "Dummy title"
+                },
+                // life-cycle hooks
+                beforeCreate: function() {
+                    console.log("beforeCreate()");
+                },
+                created: function() {
+                    console.log("created()");
+                },
+                beforeMount: function() {
+                    console.log("beforeMount()");
+                },
+                mounted: function() {
+                    console.log("mounted()");
+                },
+                beforeUpdate: function() {
+                    console.log("beforeUpdate()");
+                },
+                updated: function() {
+                    console.log("updated()");
+                },
+                beforeDestroy: function() {
+                    console.log("beforeDestroy()");
+                },
+                destroyed: function() {
+                    console.log("destroyed()");
+                },
+                methods: {
+                    destroy: function() {
+                        this.$destroy();
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <div class="app">
+        <h1 class="title">Instance LifeCycle</h1>
+        <p>
+            - new Vue() =><br>
+            hook: beforeCreate()
+        </p>
+        <p>
+            instance Created =>
+            <br> hook: created()
+        </p>
+        <p>
+            Compile template OR el's template =>
+            <br> hook: beforeMount()
+        </p>
+        <p>
+            hook: mounted()
+            Mounted to DOM <=> Data Changed<br>
+            hook: beforeUpdate()<br>
+            Re-Render DOM<br>
+            hook: updated() (back to Mounted to DOM)
+        </p>
+        <p>
+            hook: beforeDestroy()
+        </p>
+        <p>
+            Destroyed => hook: detroyed()
+        </p>
+    </div>
+    <div id="app1">
+        {{ title }}
+        <button class="btn"
+        @click="title = 'Title changed'">change title</button>
+        <button class="btn"
+        @click="destroy">destroy element</button>
+    </div>
+</body>
+
+</html>

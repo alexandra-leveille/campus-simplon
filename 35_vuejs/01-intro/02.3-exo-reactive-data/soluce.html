@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 2 Exo 3 - soluce</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#exercice-3",
+                data: {
+                    count: 0,
+                    timeout: 3000
+                },
+                computed: {
+                    result: function() {
+                        return this.count <= 13 ? "keep increasing" : "Greater than 13";
+                    }
+                },
+                watch: {
+                    result: function () {
+                        setTimeout(function () {
+                            this.count = 0;
+                        }.bind(this), this.timeout);
+                    }
+                }
+            })
+        };
+    </script>
+    <style>
+        body {
+            font-family: arial;
+        }
+
+        .app>div,
+        .app>p {
+            border-bottom: 1px solid dodgerblue;
+            margin: 10px 0;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="exercice-3">
+        <!--  0/ pour cet exo, utiliser les syntaxes raccourçies -->
+        <!--  1/ Déclarer une prop "count" -->
+        <!--  2/ Au click sur les boutons, ajouter respectivement 1 OU 5 à "count" -->
+        <!--  3/ Afficher la valeur courante dans <p> ci-dessous (0 par défaut )-->
+        <p>Valeur courante : {{ count }}</p>
+        <div>
+            <button @click="count += 1">add 1</button>
+            <button @click="count += 5">add 5</button>
+        </div>
+        <!--  4/ Afficher dans le <p> suivant la prop "result".
+        Cette prop affiche -Keep increasing- tant que "count" est inférieur à 13 OU -Greater than 13- -->
+        <p>
+            {{ result }}
+        </p>
+        <!--  5 écouter (watch) les changements sur "result" et reset "count" après un délai de 3 secondes
+        utiliser l'input suivant pour régler le timeout -->
+        <input type="number" v-model="timeout" step="1000" min="0">
+    </div>
+</body>
+
+</html>

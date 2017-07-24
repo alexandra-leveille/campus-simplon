@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 2.4 - Classes CSS</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+    <style>
+        .block {
+            cursor: pointer;
+            height: 100px;
+            width: 100px;
+            border: 1px solid;
+            background: gray;
+        }
+        .blue {
+            background: dodgerblue;
+        }
+        .red {
+            background: firebrick;
+        }
+        .green {
+            background: forestgreen;
+        }
+    </style>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        window.onload = function start() {
+            new Vue({
+                el: "#app",
+                data: {
+                    activeRed: false,
+                    activeGreen: false,
+                    activeBlue: false,
+                    color: "gray",
+                    size: 100
+                },
+                computed: {
+                    blockClasses: function() {
+                        return {
+                            red: this.activeRed,
+                            blue: !this.activeRed
+                        }
+                    },
+                    setSize: function(e) {
+                        return {
+                            height: this.size + "px",
+                            width: this.size + "px"
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+
+<body>
+    <h1 class="title">Classes CSS</h1>
+    <div id="app">
+        <div class="f-row">
+            <div @click="activeRed = !activeRed"
+            class="block" :class="blockClasses"></div>
+
+            <div @click="activeGreen = !activeGreen"
+            class="block" :class="{green: activeGreen}"></div>
+
+            <div class="block" :class="[color]"></div>
+
+            <div class="block" :style="{backgroundColor: color}"></div>
+
+            <div class="block"
+            :style="[setSize, {'background-color': color}]"></div>
+        </div>
+        <hr>
+        <input type="text" v-model="color">
+        <input type="range" v-model="size" min="50">
+
+    </div>
+</body>
+
+</html>

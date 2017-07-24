@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue JS - Section 3.3 - Exo 5 - soluce</title>
+    <link rel="stylesheet" href="../00-styles/styles.css">
+    <style>
+
+    </style>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        window.onload = function start() {
+            new Vue({
+                el: "#exercice-5",
+                data: {
+                    displayFirst: true,
+                    gears: ["tshirt", "hoodie", "jeans", "cap"],
+                    monsters: [
+                        {name: "frankenstein", type: "experimentation"},
+                        {name: "leviathan", type: "sea monster"},
+                        {name: "nosferatu", type: "vampire"}
+                    ],
+                    last: {name: "TESTOBJECT", data:[1, 2, 0.313, 2.30]}
+                },
+                computed: {},
+                methods: {}
+            })
+        };
+    </script>
+</head>
+
+<body>
+    <div class="app" id="exercice-5">
+        <!--  1/ Lier le <button> suivant au toggle des deux <p> suivants
+        utiliser v-if et v-show, utiliser la console DOM pour constater la différence de traitement -->
+        <div>
+            <button @click="displayFirst = !displayFirst">toggle</button>
+            <p v-if="displayFirst">je suis visible !</p>
+            <p v-else>... non mais moi je le suis !</p>
+            <hr>
+            <p v-show="displayFirst">je suis visible !</p>
+            <p v-show="!displayFirst">... non mais moi je le suis !</p>
+        </div>
+        
+        <!--  2/ remplir un <ul> de <li> représentant les éléments d'un tableau JS de votre choix. Afficher l'index de chaque item -->
+        <ul>
+            <li v-for="(gear, i) in gears">{{i}} - {{gear}}</li>
+        </ul>
+
+        <!--  3/ afficher toutes les paires clé:valeur d'un tableau d'objet JS. Afficher l'index de chaque item -->
+        <div>
+            <div v-for="(monster, index) in monsters">
+                <span>{{index}}</span>
+                <template v-for="(value, key) in monster">
+                    <h2 v-if="key === 'name'">{{key}}: {{value}}</h2>
+                    <p v-else>{{key}} : {{value}}</p>
+                </template>
+            </div>
+        </div>
+
+        <!--  4/ afficher les valeurs contenues dans l'objet suivant :
+        {name: "TESTOBJECT", data:[1, 2, 0.313, 2.30]}
+        en utilisant v-if et v-for -->
+        <div>
+            <div v-for="val in last">
+                <span v-if="!val.push">{{val}}</span>
+                <ul v-else>
+                    <li v-for="v in val">{{v}}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
