@@ -25,8 +25,7 @@ export default {
 </script>
 <style lang="scss">
 
-$blue: dodgerblue;
-$text: white;
+@import "assets/styles/global.scss";
 
 body {
     background: $blue;

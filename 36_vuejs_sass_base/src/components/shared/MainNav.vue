@@ -12,15 +12,17 @@
 </template>
 
 <script>
+
+// @import "styles/global.scss"
+
 export default {
 }
 </script>
 
 <style lang="scss">
-nav {
-    background: white;
-    color: $blue;
-}
+
+@import "../../assets/styles/global.scss";
+
 nav a {
     color: $text !important;
 }
